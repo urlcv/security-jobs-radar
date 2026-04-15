@@ -1,0 +1,37 @@
+{
+    "name": "urlcv/security-jobs-radar",
+    "description": "Enter a domain to see what a company's security hiring activity suggests about priorities, tooling, and pressure points.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["security", "hiring", "jobs", "intelligence", "osint", "recruiting"],
+    "homepage": "https://urlcv.com/tools/security-jobs-radar",
+    "authors": [
+        {
+            "name": "URLCV",
+            "homepage": "https://urlcv.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "suggest": {
+        "illuminate/support": "Required for Laravel integration (Blade views)"
+    },
+    "autoload": {
+        "psr-4": {
+            "URLCV\\SecurityJobsRadar\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "URLCV\\SecurityJobsRadar\\Laravel\\SecurityJobsRadarServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}
