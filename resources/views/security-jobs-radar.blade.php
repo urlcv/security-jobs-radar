@@ -132,15 +132,15 @@
                 <h3 class="text-sm font-semibold text-gray-900 mb-3">Security Roles Found</h3>
                 <div class="flex flex-wrap gap-2">
                     <template x-for="(role, idx) in result.security_job_titles" :key="idx">
-                        <span>
-                            <a x-show="role.url" :href="role.url" target="_blank" rel="noopener"
-                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-primary-700 hover:bg-primary-50 hover:border-primary-300 transition-colors">
-                                <span x-text="role.title"></span>
-                                <svg class="w-3 h-3 shrink-0 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                            </a>
-                            <span x-show="!role.url"
-                                class="inline-flex items-center px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700" x-text="role.title"></span>
-                        </span>
+                        <a :href="role.url || '#'"
+                           :target="role.url ? '_blank' : null"
+                           rel="noopener"
+                           class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm transition-colors"
+                           :class="role.url ? 'text-primary-700 hover:bg-primary-50 hover:border-primary-300 cursor-pointer' : 'text-gray-700 cursor-default'"
+                           @click="!role.url && $event.preventDefault()">
+                            <span x-text="role.title"></span>
+                            <svg x-show="role.url" class="w-3 h-3 shrink-0 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
                     </template>
                 </div>
             </div>
