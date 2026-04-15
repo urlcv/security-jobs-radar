@@ -131,8 +131,14 @@
             <div x-show="result.security_job_titles.length > 0" class="rounded-2xl border border-gray-200 bg-white p-5">
                 <h3 class="text-sm font-semibold text-gray-900 mb-3">Security Roles Found</h3>
                 <div class="flex flex-wrap gap-2">
-                    <template x-for="title in result.security_job_titles" :key="title">
-                        <span class="inline-flex items-center px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700" x-text="title"></span>
+                    <template x-for="role in result.security_job_titles" :key="role.title">
+                        <a x-show="role.url" :href="role.url" target="_blank" rel="noopener"
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-primary-700 hover:bg-primary-50 hover:border-primary-300 transition-colors">
+                            <span x-text="role.title"></span>
+                            <svg class="w-3 h-3 shrink-0 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        </a>
+                        <span x-show="!role.url"
+                            class="inline-flex items-center px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700" x-text="role.title"></span>
                     </template>
                 </div>
             </div>
@@ -378,7 +384,9 @@ function securityJobsRadar() {
 
             if (r.security_job_titles.length > 0) {
                 out += `SECURITY ROLES\n${'-'.repeat(30)}\n`;
-                r.security_job_titles.forEach(t => out += `  - ${t}\n`);
+                r.security_job_titles.forEach(role => {
+                    out += role.url ? `  - ${role.title} (${role.url})\n` : `  - ${role.title}\n`;
+                });
                 out += '\n';
             }
 
